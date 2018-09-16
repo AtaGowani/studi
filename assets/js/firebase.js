@@ -13,10 +13,10 @@ firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log(user)
-    window.location = '/';
+    window.location = '/welcome';
     // User is signed in.
   } else {
-    window.location = '/';
+    window.location = '/login';
     // No user is signed in.
   }
 });
