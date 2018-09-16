@@ -10,6 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="this.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<script src="../assets/js/session.js"></script>
 	</head>
@@ -56,6 +57,17 @@
 					</div>
 				<!--	<a href="#one" class="goto-next scrolly">Next</a> -->
 				</section>
+
+				<div id="hide">
+					<div class="camera">
+				    <video id="video" autoplay>Video stream not available.</video>
+				  </div>
+				  <canvas id="canvas">
+				  </canvas>
+				  <div class="output">
+				    <img id="photo" alt="The screen capture will appear in this box.">
+				  </div>
+				</div>
 
 			<!-- One -->
 		<!--		<section id="one" class="spotlight style1 bottom">
@@ -204,6 +216,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="capture.js"></script>
 
 	</body>
 </html>

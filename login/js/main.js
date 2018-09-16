@@ -1,4 +1,3 @@
-
 (function ($) {
     "use strict";
 
@@ -13,10 +12,10 @@
             else {
                 $(this).removeClass('has-val');
             }
-        })    
+        })
     })
-  
-  
+
+
     /*==================================================================
     [ Validate ]*/
     var input = $('.validate-input .input100');
@@ -28,6 +27,7 @@
             if(validate(input[i]) == false){
                 showValidate(input[i]);
                 check=false;
+                console.log("lol");
             }
         }
 
@@ -65,6 +65,6 @@
 
         $(thisAlert).removeClass('alert-validate');
     }
-    
+
 
 })(jQuery);
