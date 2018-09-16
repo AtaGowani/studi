@@ -30,7 +30,41 @@ try
 {
     $response = $request->send();
     $json = $response->getBody();
-    echo $json;
+    $arr = json_decode($json, true);
+    $angerVal = $arr[0]['faceAttributes']['emotion']['anger'];
+    $contemptVal = $arr[0]['faceAttributes']['emotion']['contempt'];
+    $disgustVal = $arr[0]['faceAttributes']['emotion']['disgust'];
+    $fearVal = $arr[0]['faceAttributes']['emotion']['fear'];
+    $happinessVal = $arr[0]['faceAttributes']['emotion']['happiness'];
+    $neutralVal = $arr[0]['faceAttributes']['emotion']['neutral'];
+    $sadnessVal = $arr[0]['faceAttributes']['emotion']['sadness'];
+    $surpriseVal = $arr[0]['faceAttributes']['emotion']['surprise'];
+
+    $highestVal = max($angerVal, $contemptVal, $disgustVal,
+    				  $fearVal, $happinessVal, $neutralVal, $sadnessVal, $surpriseVal);
+
+    if($highestVal < 0.5)
+    {
+      echo "nan";
+    }
+    elseif($angerVal == $highestVal || $contemptVal == $highestVal ||
+       $disgustVal == $highestVal || $fearVal == $highestVal ||
+       $sadnessVal == $highestVal)
+    {
+    	echo "negative";
+    }
+    elseif($neutralVal == $highestVal || $surpriseVal == $highestVal)
+    {
+    	echo "neutral";
+    }
+    elseif($happinessVal == $highestVal)
+    {
+    	echo "positive";
+    }
+    else
+    {
+    	echo "nan";
+    }
 }
 catch (HttpException $ex)
 {

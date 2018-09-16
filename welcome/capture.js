@@ -123,7 +123,7 @@
           time: data2
           },
           success: function(data3) {
-            
+            console.log(data3);
           }
               });
       }
