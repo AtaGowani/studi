@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
 	<script src="../assets/js/firebase.js"></script>
 	<script src="../assets/js/auth.js"></script>
 	<script src="../assets/js/user.js"></script>
@@ -25,21 +26,21 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<!-- <form class="login100-form validate-form"> -->
 					<span class="login100-form-title p-b-43">
 						Login to your account
 					</span>
 
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email">
+						<input class="input100" type="text" name="email" id="email">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Email</span>
 					</div>
 
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
+						<input class="input100" type="password" name="pass" id="password">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Password</span>
 					</div>
@@ -61,7 +62,7 @@
 
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" onclick="login()">
 							Login
 						</button>
 					</div>
@@ -81,7 +82,7 @@
 							<i class="fa fa-twitter" aria-hidden="true"></i>
 						</a>
 					</div>
-				</form>
+				<!-- </form> -->
 
 				<div class="login100-more" style="background-image: url('https://i.imgur.com/U30kOa0.png');">
 				</div>

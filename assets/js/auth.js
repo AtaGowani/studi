@@ -5,9 +5,21 @@ function validateFields(email, password) {
   return true;
 }
 
+function checkStatus() {
+  if (user) {
+    console.log(user)
+    window.location = '/welcome';
+  } else {
+    window.location = '/login';
+  }
+}
+
 function login() {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
+
+  console.log(email);
+  console.log(password);
 
   if (validateFields(email, password)) {
     var cred = firebase.auth().signInWithEmailAndPassword(
@@ -23,8 +35,7 @@ function login() {
     console.log(cred.User);
 
     if (cred.User !== null && cred.User !== undefined) {
-      console.log(cred.User.displayName);
-      return true;
+      window.location = '/welcome';
     }
     return false;
   }
@@ -32,8 +43,10 @@ function login() {
 
 function logout() {
   firebase.auth().signOut().catch(function(error) {
-    console.error(error);
+    console.error(error); 
   });
+
+  window.location = '/login';
 }
 
 function getDisplayName() {
