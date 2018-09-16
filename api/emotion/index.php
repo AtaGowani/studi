@@ -24,7 +24,7 @@ $url->setQueryVariables($parameters);
 
 $request->setMethod(HTTP_Request2::METHOD_POST);
 
-$request->setBody('{"url": "https://751b6845.ngrok.io/upload/usermedia/'.$user_id.'-'.$time.'.png"}');
+$request->setBody('{"url": "https://5afadc9a.ngrok.io/upload/usermedia/'.$user_id.'-'.$time.'.png"}');
 
 try
 {

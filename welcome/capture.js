@@ -5,15 +5,33 @@
   var video = null;
   var canvas = null;
   var photo = null;
+  var timer = null;
   var startstopbutton = null;
   var permissionNotGiven = true;
   var permissionBeingAsked = false;
   var stopSesh = true;
 
+  var globalSeconds = 0;
+  var globalMinutes = 0;
+  var globalHours = 0;
+
+  var positiveCount = 0;
+  var negativeCount = 0;
+  var neutralCount = 0;
+  var awayCount = 0;
+
+  var notificationPerm = false;
+
+  var request = new XMLHttpRequest();
+  request.open("GET", "quotes.json", false);
+  request.send(null)
+  var quotes = JSON.parse(request.responseText);
+
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
+    timer = document.getElementById('timer');
     startstopbutton = document.getElementById('startstopbutton');
 
     navigator.getMedia = ( navigator.getUserMedia ||
@@ -40,10 +58,18 @@
       {
         startstopbutton.innerHTML = "Stop Session";
         stopSesh = false;
+        startstopbutton.style = "background-color: #EC407A;";
+        timer.classList.remove('hide');
       }
       else {
         startstopbutton.innerHTML = "Start Session";
+        startstopbutton.style = "background-color: #ffe41e;";
+        timer.classList.add('hide');
         stopSesh = true;
+        globalSeconds = 0;
+        globalMinutes = 0;
+        globalHours = 0;
+        timer.innerHTML = '00:00:00';
       }
       ev.preventDefault();
     }, false);
@@ -87,13 +113,25 @@
           }
           permissionNotGiven = false;
           permissionBeingAsked = false;
+          Notification.requestPermission().then(function(result) {
+            if (result === 'denied') {
+              notificationPerm = false;
+            }
+            else {
+              notificationPerm = true;
+            }
+          });
         },
         function(err) {
           permissionNotGiven = true;
           permissionBeingAsked = false;
           startstopbutton.innerHTML = "Start Session";
+          startstopbutton.style = "background-color: #ffe41e;";
           stopSesh = true;
-          console.log("An error occured! " + err);
+          stopSesh = true;
+          globalSeconds = 0;
+          globalMinutes = 0;
+          globalHours = 0;
         }
       );
     }
@@ -124,6 +162,34 @@
           },
           success: function(data3) {
             console.log(data3);
+            if(data3 == 'positive')
+            {
+              positiveCount++;
+            }
+            if(data3 == 'negative')
+            {
+              negativeCount++;
+            }
+            if(data3 == 'neutral')
+            {
+              neutralCount++;
+            }
+            if(data3 == 'nan')
+            {
+              awayCount++;
+            }
+            if(negativeCount >= 5)
+            {
+              positiveCount = 0;
+              negativeCount = 0;
+              neutralCount = 0;
+              // Notify user
+              if(notificationPerm)
+              {
+                var randomNum = Math.floor(Math.random()*(quotes.length - 1));
+                var notification = new Notification(quotes[randomNum].quote);
+              }
+            }
           }
               });
       }
@@ -138,11 +204,28 @@
   window.addEventListener('load', startup, false);
 
   window.setInterval(function(){
-         /// call your function here
          if(!stopSesh)
          {
-           takepicture()
+           takepicture();
          }
   }, 5000);  // Change Interval here to test. For eg: 5000 for 5 sec
+
+
+  window.setInterval(function(){
+         if(!stopSesh)
+         {
+           globalSeconds++;
+           if (globalSeconds === 60) {
+              globalMinutes++;
+              globalSeconds = 0;
+            }
+          if (globalMinutes === 60) {
+              globalHours++;
+              globalMinutes = 0;
+              globalSeconds = 0;
+            }
+          timer.innerHTML = `${("0" + globalHours).slice(-2)}:${("0" + globalMinutes).slice(-2)}:${("0" + globalSeconds).slice(-2)}`;
+         }
+  }, 1000);  // Change Interval here to test. For eg: 5000 for 5 sec
 
 })();
