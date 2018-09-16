@@ -15,7 +15,8 @@
 	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script>
 	<script src="../assets/js/firebase.js"></script>
 	<script src="../assets/js/auth.js"></script>
 	<script src="../assets/js/user.js"></script>
@@ -26,7 +27,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<!-- <form class="login100-form validate-form"> -->
+				<form class="login100-form validate-form" onsubmit="login(); return false;">
 					<span class="login100-form-title p-b-43">
 						Login to your account
 					</span>
@@ -62,7 +63,7 @@
 
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" onclick="login()">
+						<button class="login100-form-btn">
 							Login
 						</button>
 					</div>
@@ -82,7 +83,7 @@
 							<i class="fa fa-twitter" aria-hidden="true"></i>
 						</a>
 					</div>
-				<!-- </form> -->
+				</form>
 
 				<div class="login100-more" style="background-image: url('https://i.imgur.com/U30kOa0.png');">
 				</div>

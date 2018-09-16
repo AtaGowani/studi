@@ -1,10 +1,3 @@
-function validateFields(email, password) {
-  if (!email || !password) {
-    return false;
-  }
-  return true;
-}
-
 function checkStatus() {
   if (user) {
     console.log(user)
@@ -21,24 +14,27 @@ function login() {
   console.log(email);
   console.log(password);
 
-  if (validateFields(email, password)) {
-    var cred = firebase.auth().signInWithEmailAndPassword(
-      email,
-      password
-    ).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-    });
+  var cred = firebase.auth().signInWithEmailAndPassword(
+    email,
+    password
+  ).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
 
-    console.log(cred.User);
+    console.error(errorCode);
+    console.error(errorMessage);
+  });
 
-    if (cred.User !== null && cred.User !== undefined) {
-      window.location = '/welcome';
-    }
-    return false;
+  console.log(cred);
+
+  var user = firebase.auth().currentUser;
+
+  if (user) {
+    window.location = '/welcome';
   }
+
+  return false;
 }
 
 function logout() {
