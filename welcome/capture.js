@@ -6,6 +6,11 @@
   var canvas = null;
   var photo = null;
   var timer = null;
+  var contentHolder = null;
+  var countTVholder = null;
+  var positiveTV = null;
+  var negativeTV = null;
+  var neutralTV = null;
   var startstopbutton = null;
   var permissionNotGiven = true;
   var permissionBeingAsked = false;
@@ -32,7 +37,14 @@
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
     timer = document.getElementById('timer');
+
     startstopbutton = document.getElementById('startstopbutton');
+
+    contentHolder = document.getElementById('banner');
+    countTVholder = document.getElementById('countTVholder');
+    positiveTV = document.getElementById('productive');
+    negativeTV = document.getElementById('stressful');
+    neutralTV = document.getElementById('neutral');
 
     navigator.getMedia = ( navigator.getUserMedia ||
                            navigator.webkitGetUserMedia ||
@@ -70,6 +82,8 @@
         globalMinutes = 0;
         globalHours = 0;
         timer.innerHTML = '00:00:00';
+        contentHolder.classList.add('superhide');
+        countTVholder.classList.remove('superhide');
       }
       ev.preventDefault();
     }, false);
@@ -178,11 +192,16 @@
             {
               awayCount++;
             }
-            if(negativeCount >= 5)
+            if(neutralCount >= 2)
             {
               positiveCount = 0;
               negativeCount = 0;
               neutralCount = 0;
+
+              positiveTV.innerHTML = positiveCount+' counts';
+              negativeTV.innerHTML = negativeCount+' counts';
+              neutralTV.innerHTML = neutralCount+' counts';
+
               // Notify user
               if(notificationPerm)
               {
