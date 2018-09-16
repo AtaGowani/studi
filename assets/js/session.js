@@ -8,19 +8,23 @@ var emotions = {
   negative: 0
 }
 
+var interval;
+
 function newSession() {
   var btn = document.getElementById("start_session");
   btn.innerHTML = "Stop Studi Session";
+  btn.style = "background-color: #EC407A";
+  btn.onclick = stopSession;
 
   var header = btn.parentElement;
   var p = document.createElement("p");
-  p.id = "timmer";
+  p.id = "timer";
   p.innerHTML = "00:00:00";
 
   p.style = "text-align: center";
   header.append(p);
 
-  setInterval(function() {
+  interval = setInterval(function() {
     seconds++;
     if (seconds === 60) {
       minutes++;
@@ -41,9 +45,13 @@ function newSession() {
 function stopSession() {
   var btn = document.getElementById("start_session");
   btn.innerHTML = "Start Studi Session";
+  btn.style = "background-color: #ffe41e";
+  btn.onclick = newSession;
 
-  var timer = document.getElementById("timmer");
+  var timer = document.getElementById("timer");
   timer.parentElement.removeChild(timer);
+
+  clearInterval(interval);
 
   seconds = 0;
   minutes = 0;
