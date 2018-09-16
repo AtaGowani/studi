@@ -7,37 +7,37 @@
 
 @font-face {
   font-family: Poppins-Regular;
-  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+  src: url('../fonts/poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+  src: url('../fonts/poppins/Poppins-Medium.ttf');
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+  src: url('../fonts/poppins/Poppins-Bold.ttf');
 }
 
 @font-face {
   font-family: Poppins-SemiBold;
-  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+  src: url('../fonts/poppins/Poppins-SemiBold.ttf');
 }
 
 @font-face {
   font-family: Montserrat-Bold;
-  src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
+  src: url('../fonts/montserrat/Montserrat-Bold.ttf');
 }
 
 @font-face {
   font-family: Montserrat-SemiBold;
-  src: url('../fonts/montserrat/Montserrat-SemiBold.ttf'); 
+  src: url('../fonts/montserrat/Montserrat-SemiBold.ttf');
 }
 
 @font-face {
   font-family: Montserrat-Regular;
-  src: url('../fonts/montserrat/Montserrat-Regular.ttf'); 
+  src: url('../fonts/montserrat/Montserrat-Regular.ttf');
 }
 
 
@@ -45,8 +45,8 @@
 [ RESTYLE TAG ]*/
 
 * {
-	margin: 0px; 
-	padding: 0px; 
+	margin: 0px;
+	padding: 0px;
 	box-sizing: border-box;
 }
 
@@ -198,7 +198,7 @@ iframe {
 }
 
 .container-login100 {
-  width: 100%;  
+  width: 100%;
   min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
@@ -208,7 +208,7 @@ iframe {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  background: #f2f2f2;
+  background: #f4d942;
 }
 
 
@@ -290,7 +290,7 @@ iframe {
   height: 80px;
   position: relative;
   border: 1px solid #e6e6e6;
-  border-radius: 10px;
+
   margin-bottom: 10px;
 }
 
@@ -436,7 +436,7 @@ input.input100 {
   position: absolute;
   width: 18px;
   height: 18px;
-  border-radius: 2px;
+
   background: #fff;
   border: 1px solid #6675df;
   left: 0;
@@ -477,8 +477,8 @@ input.input100 {
   padding: 0 20px;
   width: 100%;
   height: 50px;
-  border-radius: 10px;
-  background: #6675df;
+
+  background: #f4d942;
 
   font-family: Montserrat-Bold;
   font-size: 12px;
@@ -547,7 +547,7 @@ input.input100 {
   max-width: 70%;
   background-color: #fff;
   border: 1px solid #c80000;
-  border-radius: 2px;
+
   padding: 4px 25px 4px 10px;
   top: 50%;
   -webkit-transform: translateY(-50%);
