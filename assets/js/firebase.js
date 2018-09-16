@@ -10,13 +10,13 @@ var config = {
 
 firebase.initializeApp(config);
 
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    console.log(user)
-    window.location = '/';
-    // User is signed in.
-  } else {
-    window.location = '/';
-    // No user is signed in.
-  }
-});
+// firebase.auth().onAuthStateChanged(function(user) {
+//   if (user) {
+//     console.log(user)
+//     window.location = '/welcome';
+//     // User is signed in.
+//   } else {
+//     window.location = '/login';
+//     // No user is signed in.
+//   }
+// });
