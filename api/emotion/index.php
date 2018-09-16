@@ -1,15 +1,9 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-$FIREBASE = "https://studi-10484.firebaseio.com/ ";
-
 require_once 'HTTP/Request2.php';
 
 $user_id = $_POST['user_id'];
-
-$img_url_id = "https://www.studitime.com/upload/usermedia/" . $user_id . ".png";
+$time = $_POST['time'];
 
 $request = new Http_Request2('https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect');
 $url = $request->getUrl();
@@ -30,22 +24,47 @@ $url->setQueryVariables($parameters);
 
 $request->setMethod(HTTP_Request2::METHOD_POST);
 
-$request->setBody('{"url": "http://www.cndajin.com/data/wls/288/26033494.jpg"}');
+$request->setBody('{"url": "https://5afadc9a.ngrok.io/upload/usermedia/'.$user_id.'-'.$time.'.png"}');
 
 try
 {
     $response = $request->send();
     $json = $response->getBody();
-    $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/studi-10484-firebase-adminsdk-isfwi-04e7b7c3d0.json');
-    $firebase = (new Factory)
-    ->withServiceAccount($serviceAccount)
-    ->create();
-    $database = $firebase->getDatabase();
-    $db->getReference('user/session')
-    ->set([
-       'name' => 'Advait Saravade'
-       'website' => 'https://app.domain.tld',
-      ]);
+    $arr = json_decode($json, true);
+    $angerVal = $arr[0]['faceAttributes']['emotion']['anger'];
+    $contemptVal = $arr[0]['faceAttributes']['emotion']['contempt'];
+    $disgustVal = $arr[0]['faceAttributes']['emotion']['disgust'];
+    $fearVal = $arr[0]['faceAttributes']['emotion']['fear'];
+    $happinessVal = $arr[0]['faceAttributes']['emotion']['happiness'];
+    $neutralVal = $arr[0]['faceAttributes']['emotion']['neutral'];
+    $sadnessVal = $arr[0]['faceAttributes']['emotion']['sadness'];
+    $surpriseVal = $arr[0]['faceAttributes']['emotion']['surprise'];
+
+    $highestVal = max($angerVal, $contemptVal, $disgustVal,
+    				  $fearVal, $happinessVal, $neutralVal, $sadnessVal, $surpriseVal);
+
+    if($highestVal < 0.5)
+    {
+      echo "nan";
+    }
+    elseif($angerVal == $highestVal || $contemptVal == $highestVal ||
+       $disgustVal == $highestVal || $fearVal == $highestVal ||
+       $sadnessVal == $highestVal)
+    {
+    	echo "negative";
+    }
+    elseif($neutralVal == $highestVal || $surpriseVal == $highestVal)
+    {
+    	echo "neutral";
+    }
+    elseif($happinessVal == $highestVal)
+    {
+    	echo "positive";
+    }
+    else
+    {
+    	echo "nan";
+    }
 }
 catch (HttpException $ex)
 {

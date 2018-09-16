@@ -1,39 +1,48 @@
-function validateFields(email, password) {
-  if (!email || !password) {
-    return false;
+function checkStatus() {
+  if (user) {
+    console.log(user)
+    window.location = '/welcome/index.html';
+  } else {
+    window.location = '/login/index.html';
   }
-  return true;
 }
 
 function login() {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
 
-  if (validateFields(email, password)) {
-    var cred = firebase.auth().signInWithEmailAndPassword(
-      email,
-      password
-    ).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-    });
+  console.log(email);
+  console.log(password);
 
-    console.log(cred.User);
+  var cred = firebase.auth().signInWithEmailAndPassword(
+    email,
+    password
+  ).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
 
-    if (cred.User !== null && cred.User !== undefined) {
-      console.log(cred.User.displayName);
-      return true;
-    }
-    return false;
+    console.error(errorCode);
+    console.error(errorMessage);
+  });
+
+  console.log(cred);
+
+  var user = firebase.auth().currentUser;
+
+  if (user) {
+    window.location = '/welcome/index.html';
   }
+
+  return false;
 }
 
 function logout() {
   firebase.auth().signOut().catch(function(error) {
     console.error(error);
   });
+
+  window.location = '/login/index.html';
 }
 
 function getDisplayName() {
