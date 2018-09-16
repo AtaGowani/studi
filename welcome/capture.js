@@ -99,21 +99,6 @@
     }
 
 
-    function dataURItoBlob(dataURI) {
-    var byteString;
-    if (dataURI.split(',')[0].indexOf('base64') >= 0)
-        byteString = atob(dataURI.split(',')[1]);
-    else
-        byteString = unescape(dataURI.split(',')[1]);
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-    var ia = new Uint8Array(byteString.length);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ia], {type:mimeString});
-  }
-
-
     var context = canvas.getContext('2d');
     if (width && height) {
       canvas.width = width;
@@ -121,14 +106,28 @@
       context.drawImage(video, 0, 0, width, height);
 
       var dataURL = canvas.toDataURL('image/png');
+
       $.ajax({
       method: 'POST',
-      url: 'http://localhost:8888/studitime/upload/index.php',
+      url: '../upload/index.php',
       data: {
       photo: dataURL,
       user_id: "11"
+      },
+      success: function(data2) {
+        $.ajax({
+          method: 'POST',
+          url: '../api/emotion/index.php',
+          data: {
+          user_id: "11",
+          time: data2
+          },
+          success: function(data3) {
+            
+          }
+              });
       }
-      });
+    });
 
     } else {
       clearphoto();
@@ -137,12 +136,13 @@
 
 
   window.addEventListener('load', startup, false);
+
   window.setInterval(function(){
          /// call your function here
          if(!stopSesh)
          {
            takepicture()
          }
-  }, 2000);  // Change Interval here to test. For eg: 5000 for 5 sec
+  }, 5000);  // Change Interval here to test. For eg: 5000 for 5 sec
 
 })();

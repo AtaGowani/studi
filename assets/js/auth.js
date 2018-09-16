@@ -1,9 +1,9 @@
 function checkStatus() {
   if (user) {
     console.log(user)
-    window.location = '/welcome';
+    window.location = '/welcome/index.html';
   } else {
-    window.location = '/login';
+    window.location = '/login/index.html';
   }
 }
 
@@ -31,7 +31,7 @@ function login() {
   var user = firebase.auth().currentUser;
 
   if (user) {
-    window.location = '/welcome';
+    window.location = '/welcome/index.html';
   }
 
   return false;
@@ -39,10 +39,10 @@ function login() {
 
 function logout() {
   firebase.auth().signOut().catch(function(error) {
-    console.error(error); 
+    console.error(error);
   });
 
-  window.location = '/login';
+  window.location = '/login/index.html';
 }
 
 function getDisplayName() {
